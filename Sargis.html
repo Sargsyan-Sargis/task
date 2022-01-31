@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="FlickrSearch.js"> </script>
+    <title>Flickr search</title>
+    
+</head>
+<body> 
+     <form action="">
+        
+        <div class="search">
+            <div class="icon"></div>
+            <div class="input">
+                <input type="text" placeholder="search" id="mysearch">
+            </div>
+            <span class="clear" onclick="document.getElementById('mysearch').value=''"></span>
+        </div>
+
+
+    </form>     
+
+<div class="div">
+    <div class="box"><div class="fill" draggable="true"></div></div>
+    <div class="box"></div>
+</div>
+
+    <script>
+
+        const icon = document.querySelector(".icon");
+        const search = document.querySelector(".search");
+    
+        icon.onclick = function() {
+            search.classList.toggle ('active')
+        }
+
+        const fill = document.querySelector('.fill');
+            const empties = document.querySelectorAll('.box');
+            fill.addEventListener('dragstart', dragStart);
+            fill.addEventListener('dragend', dragEnd);
+            for (const box of empties) {
+            box.addEventListener('dragover', dragOver);
+            box.addEventListener('dragenter', dragEnter);
+            box.addEventListener('dragleave', dragLeave);
+            box.addEventListener('drop', dragDrop);
+        }
+        function dragStart() {
+        this.className += ' hold';
+        setTimeout(() => (this.className = 'invisible'), 0);
+        }
+        function dragEnd() {
+        this.className = 'fill';
+        }
+        function dragOver(e) {
+        e.preventDefault();
+        }
+        function dragEnter(e) {
+        e.preventDefault();
+        this.className += ' hover';
+        }
+        function dragLeave() {
+        this.className = 'box';
+        }
+        function dragDrop() {
+        this.className = 'box';
+        this.append(fill);
+        }
+
+
+    </script>
+     
+</body>
+</html>
